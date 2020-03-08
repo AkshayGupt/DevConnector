@@ -19,10 +19,13 @@ router.post("/",[
     })
 ],
 async (req,res)=> {
+
+    //debug
+    // alert('Reached the route');
+    
     const errors = validationResult(req);
-    if(!errors.isEmpty()){
-        alert('Please Fill!')
-        return res.status(400).json({errors : errors.array()}); 
+    if(!errors.isEmpty()){       
+         return res.status(400).json({errors : errors.array()}); 
     }
 
 
@@ -37,7 +40,8 @@ try{
         s : '200',
         r: 'pg',
         d: 'mm'
-    })
+    });
+
     //Creating instance of the user (does not save ,just a instance)
     user = new User({
         name,
@@ -45,6 +49,7 @@ try{
         avatar,
         password
     });
+
     //Hashing password
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(password,salt);
