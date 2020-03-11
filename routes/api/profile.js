@@ -68,9 +68,10 @@ async (req,res) => {
     if(bio) profileFields.bio = bio;
     if(status) profileFields.status = status;
     if(githubusername) profileFields.githubusername = githubusername;
-    if(skills){
-        profileFields.skills = skills.split(",").map(skill => skill.trim());
-    }
+
+    if (typeof skills !== 'undefined' && typeof skills === 'string') {
+        profileFields.skills = skills.split(',');
+      }
 
     profileFields.social = {};
     if(youtube) profileFields.social.youtube = youtube;
